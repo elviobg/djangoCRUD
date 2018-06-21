@@ -18,3 +18,21 @@ def inserir_transacao(request):
   data = {}
   data['form'] = form
   return render(request, 'contas/form.html', data)
+
+def update(request, pk):
+  transacao = Transacao.objects.get(pk=pk)
+  form = TransacaoForm(request.POST or None, instance=transacao)
+  if form.is_valid():
+    form.save()
+    return redirect('url_home')
+
+  data = {}
+  data['form'] = form
+  return render(request, 'contas/form.html', data)
+
+def delete(request, pk):
+  
+  if Transacao.objects.filter(pk=pk).exists():
+    transacao = Transacao.objects.get(pk=pk)
+    transacao.delete()
+  return redirect('url_home')

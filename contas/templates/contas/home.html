@@ -13,7 +13,10 @@
   <br>
   <ul>
   {% for transacao in transacoes %}
-    <li>{{transacao.descricao}} - {{transacao.observacoes}}
+    <li>
+      {{transacao.descricao}} - {{transacao.observacoes}}
+      <a href="{% url 'url_update' transacao.id %}">editar</a>
+      <a href="{% url 'url_delete' transacao.id %}">remover</a>
     </li>
   {% endfor %}
   </ul>
